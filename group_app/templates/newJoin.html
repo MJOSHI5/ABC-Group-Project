@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Join {{user_event.event_name}} Event</title>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a class="links" href="/ABC/myEvents">myEvents</a>
+            <a class="links" href="/ABC/dashboard">Dashboard</a>
+            <a class="links" href="/ABC/myProfile">myProfile</a>
+            <a id="links" class="float-right" href="/ABC/logout">Log Out</a>
+        </nav>
+        <br>
+        <br>
+        <div>
+            <h1>Do You Want Your Child To Join?</h1>
+        </div>
+        <br>
+        <section id="event_info">
+            <h2>Event: {{ user_event.event_name }}</h2>
+            <br>
+            <p> <strong>Date:</strong> {{ user_event.event_date }}</p>
+            <p><strong>Time:</strong> {{ user_event.event_time }}</p>
+            <p><strong>Location:</strong> {{ user_event.location }}</a></p>
+            <p><strong>Address:</strong> {{ user_event.street_address }} {{ user_event.city}} , {{ user_event.state}} {{ user_event.zip_code}}</p>
+        </section>
+        <br>
+        <section>
+            <form id="form-button" action="/ABC/event/{{user_event.id}}/requestJoin" method="POST">
+                {% csrf_token %}
+                <table class="table" id="child_info">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Child Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Event Join?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for child in children %}
+                        <tr>
+                            <td>{{ child.full_name }}</td>
+                            <td>{{ child.age }}</td>
+                            <td>
+                                <div class="form-group">
+                                    <label for="child{{ child.id }}">Join</label>
+                                    <input type="checkbox" name="childrenJoin" id="{{ child.id }}"
+                                        value="{{ child.id }}">
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <input type="hidden" name='child_id' value='{{child.id}}'>
+                    <button class="btn btn-success" type="submit">Confirm</button>
+                </div>
+            </form>
+            <br>
+            <br>
+        </section>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>myProfile</title>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <!-- Need to update home Link later -->
+            <a class="links" href="/ABC/dashboard">Dashboard</a>
+            <a class="links" href="/ABC/myEvents">myEvents</a>
+            <a id="links" class="float-right" href="/ABC/logout">Log Out</a>
+        </nav>
+        <br>
+        <br>
+        <section>
+            <div id="my_profile">
+                <h1>Your Profile - {{ user.first_name }}!</h1>
+                <div class='pMsgs'>
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Member Since</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ user.full_name}}</td>
+                            <td>{{ user.get_date|date:"Y-m-d" }}</td>
+                            <td>{{ user.email}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form id="form-button" action="{% url 'update_myProfile' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_pw">Confirm Password:</label>
+                        <input type="password" name="confirm_pw" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success" id=btn_password>Change
+                        Password</button>
+                </form>
+            </div>
+
+        </section>
+
+        <br><br>
+
+        <section>
+            <div id="enrolled_children">
+                <h1>Enrolled Child(ren)</h1>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Child Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Program</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    {% for child in children %}
+                    <tbody>
+                        <tr>
+                            <td>{{ child.first_name }}</td>
+                            <td>{{ child.age }}</td>
+                            <td>{{ child.program }}</td>
+                            <td>
+                                <form action="{% url 'remove_child_myProfile' %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name='child_id' value='{{child.id}}'>
+                                    <button class="btn btn-danger" type="submit">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+                <a id="register-child" href="childForm" class="btn btn-secondary btn-lg btn-block">+ Add A Child </a>
+            </div>
+        </section>
+        <br>
+        <br>
+    </div>
+</body>
+
+</html>

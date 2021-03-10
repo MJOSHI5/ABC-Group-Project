@@ -1,0 +1,226 @@
+*{
+    margin:0;
+    padding:0;
+} 
+
+h1{
+    color: rgb(136, 0, 106);
+
+}
+
+h2{
+    color:red; 
+
+}
+
+
+/* Myprofile Page /
+/ Developer : Jaehyun */
+
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    margin:10px;
+}
+
+#my_profile {
+    border: solid lightgray;
+    padding: 20px;
+}
+
+#my_profile h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#enrolled_children {
+    border: solid lightgray;
+    padding: 20px;
+}
+
+#enrolled_children h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#enrolled_children a {
+    text-decoration: none;
+}
+
+#event_info {
+    border: solid lightgray;
+    padding: 20px;
+}
+
+#child_info {
+    border: solid lightgray;
+}
+
+.table tr th {
+    text-align: center;
+}
+
+.table tr td {
+    text-align: center;
+}
+
+
+/*Mridula  Start*/
+
+
+.container{
+    margin-top:10px;
+}
+
+.block{
+    display:block;
+    margin-top:4px;
+    margin-bottom:8px;
+}
+
+
+#form-button button{
+    margin-top:1rem;
+    width:100%;
+    background:purple;
+    background:yellow;
+    color:black;
+    border:yellow;
+}
+
+#header-message{
+    color:purple;
+}
+
+#background-message{
+    background:orange;
+    margin-bottom: 0;
+}
+
+#form-button{
+    margin-top:-19px;
+}
+
+#register_child h3{
+    text-align: center;
+    margin-bottom: 2px;
+}
+
+#register_child{
+    margin-top:-100px;
+}
+
+#register_child h1{
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+
+#right #register{
+    margin-left:8px;
+    background-color: rgb(81, 81, 228);
+    border:none;
+}
+
+#right{
+    margin-top:-28px;
+    text-align: center;
+}
+
+.pMsgs{
+    text-align:center;
+    text-decoration:none;
+    color:red;
+    list-style-type: none;
+}
+
+.pMsgs ul{
+    list-style-type: none;
+}
+
+.pMsgs li{
+    margin-top:4px;
+}
+
+.text-center{
+    margin-top:8px;
+}
+
+.partlogin button{
+    width:100%;
+    background-color:yellow;
+    color:black;
+    border-color:yellow;
+    font-weight:bold;
+}
+
+
+.partReg button{
+    
+    width:100%;
+    background-color:  yellow;
+    border-color:yellow;
+    color:black;
+}
+
+h3{
+    color:orange;
+}
+
+#links, .links{
+    color:red;
+}
+
+.table-links{
+    color: rgb(81, 81, 228);
+}
+
+#register-child{
+    background-color: rgb(81, 81, 228);
+}
+
+
+label{
+    font-weight: 400;
+}
+
+#delete{
+    margin-left:6px;
+}
+/*Mridula - End*/
+
+/* lily -start---- */
+#map {
+    height: 250px;
+    width: 100%;  /* The width is the width of the web page */
+    text-emphasis-color:bold;
+}
+
+h4{
+    color:orangered;   
+}
+
+h5{
+    color:orangered; 
+}
+h6{
+    color:green; 
+}
+#temp-right{
+    display:inline-block;
+    vertical-align: top;
+}
+
+.poster {
+    font-size: 11pt;
+    text-align: left;
+    font-family: sans-serif;
+    
+}
+.post{
+    font-size: 14pt;
+    text-align: left;
+    
+}
+
+/* lily -end---- */

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- test for git push -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Dashboard</title>
+</head>
+
+<body>
+
+    <!-- <h1>This is a test for git branch</h1> -->
+
+    <div class="container">
+        <h1>Welcome to ABC Child Care Center- {{ user.first_name }}!</h1>
+        <a class="links" href="/ABC/myProfile">myProfile </a> | <a class="links" href="/ABC/myEvents">myEvents </a>
+        <a id="links" class="float-right" href="/ABC/logout">Log Out</a>
+        <br><br><br><br>
+
+
+        <h3> Search from our list of events:</h3>
+
+        <div class="header">
+          <div id="nav"></div>
+        </div>
+        <div class="input-group">
+
+          <!--Search Input-->
+          <input type="search" id="SearchBox" class="form-control rounded" placeholder="Virtual Painting" aria-label="Search"
+            aria-describedby="search-addon" />
+          <!--<button type="button" class="btn btn-outline-primary">search</button>-->
+        </div>
+
+        <!--Javascript for the search-Bar, More script in the script.js file-->
+        <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+        <!--Ajax Start-->
+        <script>
+          
+          // when a user clicks a link of class not_link show the corresponding page of results
+          $(document).ready(function(){
+            $(".not_link").click(function(event){
+                event.preventDefault();
+                var a = $(this).attr('id')
+                $.post('/search/'+a, $('form').serialize(), function(res){
+                  $('#events').html(res);
+                })
+            });
+          });
+          
+          // when a user starts searching by date or text update the results
+          $(document).on('input', 'form', function(){
+            $.post('/search/0', $('form').serialize(), function(res){
+              $('#events').html(res);
+            });
+            return false;
+          })
+          
+        </script>
+
+        <!--Ajax End-->
+        <br>
+       
+<br/>
+
+     <table class="table table-striped table-bordered table-hover">
+            <thead class="thead-dark">
+		
+		  <tr>
+			<th scope="col">Event Name</th>
+			<th scope="col">Location </th>
+			<th scope="col">Date</th>
+			<th scope="col">Time</th>
+			<th scope="col">Max Capacity</th>
+			<th scope="col">Currently Enrolled</th>
+			<th scope="col">Action</th>
+		  </tr>
+    </thead>
+    
+           {% for event in events %}
+                    <tbody id="myTable">
+                        <tr>
+                         
+                            <td><a class="table-links" href="/ABC/{{event.id}}/confirmJoin">{{event.event_name}}</a></td>
+                            <td><a class="table-links" href="/ABC/{{event.id}}/confirmJoin">{{event.location}}</a></td>
+                            <td>{{ event.event_date }}</td>
+                            <td>{{ event.event_time }}</td>
+                            <td>{{ event.max_capacity }}</td>
+                            <td>{{ event.child_event.count }}</td>
+                            
+                            <td>
+                              {% if event.max_capacity > event.child_event.count%}
+                             
+                              <form action="/ABC/event/{{event.id}}/newJoin" method="post">
+                                {% csrf_token %}
+                              <input class ="btn btn-sm btn-primary" type="submit" value="Join">
+                          
+                              {% else %}
+                
+                              <p> Full </p>
+                              {% endif %}
+
+                            </form>
+                            </td>
+                          
+                        </tr>
+                        </tr>
+                    </tbody>
+
+          {% endfor %}
+                </table>
+
+
+<br/><br/>
+
+        <script src="{% static 'js/script.js' %}"></script> 
+
+</body>
+
+</html>
