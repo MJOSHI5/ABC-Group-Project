@@ -1,6 +1,7 @@
 *{
     margin:0;
     padding:0;
+    font-family: 'Quicksand', sans-serif;
 } 
 
 h1{
@@ -95,6 +96,7 @@ h2{
 #background-message{
     background:orange;
     margin-bottom: 0;
+    
 }
 
 #form-button{

@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">   
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap" rel="stylesheet">
+    <!--Ajax-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <title>Welcome to ABC ChildCare</title>
 </head>
 <body>
@@ -14,7 +19,7 @@
     <div class="container">
         <h1 class="display-4 text-center">Welcome to ABC ChildCare!</h1>
 
-        <a class="float-right" href="/ABC/logout">Back</a>   
+        <a id="links" class="float-right" href="/ABC/logout">Back</a>   
     
         <br><br>  
         <div class="card">                   
