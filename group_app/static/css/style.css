@@ -154,7 +154,9 @@ h2{
     font-weight:bold;
 }
 
-
+.full{
+    color: red;
+}
 .partReg button{
     
     width:100%;
